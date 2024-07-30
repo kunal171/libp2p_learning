@@ -1,0 +1,3 @@
+This tutorial aims to give newcomers a hands-on overview of how to use the Rust libp2p implementation. People new to Rust likely want to get started on Rust itself, before diving into all the networking fun. This library makes heavy use of asynchronous Rust. In case you are not familiar with this concept, the Rust async-book should prove useful. People new to libp2p might prefer to get a general overview at libp2p.io first, although libp2p knowledge is not required for this tutorial.
+
+We are going to build a small ping clone, sending a ping to a peer, expecting a pong as a response.
