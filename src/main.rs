@@ -1,5 +1,6 @@
-use std::error::Error;
+use libp2p::ping;
 use tracing_subscriber::EnvFilter;
+use std::error::Error;
 
 #[async_std::main]
 async fn main() -> Result<(), Box<dyn Error>> {
@@ -11,7 +12,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
             libp2p::tcp::Config::default(),
             libp2p::tls::Config::new,
             libp2p::yamux::Config::default,
-        )?;
-        
+        )?
+        .with_behaviour(|_| ping::Behaviour::default())?;
+
     Ok(())
 }
