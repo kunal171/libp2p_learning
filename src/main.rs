@@ -1,3 +1,5 @@
+use futures::prelude::*;
+use libp2p::swarm::SwarmEvent;
 use libp2p::{ping, Multiaddr};
 use std::error::Error;
 use std::time::Duration;
@@ -30,5 +32,11 @@ async fn main() -> Result<(), Box<dyn Error>> {
         println!("Dialed {addr}")
     }
 
-    Ok(())
+    loop {
+        match swarm.select_next_some().await {
+            SwarmEvent::NewListenAddr { address, .. } => println!("Listening on {address:?}"),
+            SwarmEvent::Behaviour(event) => println!("{event:?}"),
+            _ => {}
+        }
+    }
 }
